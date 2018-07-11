@@ -1,7 +1,5 @@
 package tests;
 
-import java.util.Arrays;
-
 public class TapeEquilibrium {
 
 	public static void main(String[] args) {
@@ -11,21 +9,23 @@ public class TapeEquilibrium {
 	}
 
 	public static int solution(int[] A) {
-		int min = 0;
-
 		int tot_left = 0;
-		int tot_right = Arrays.stream(A).sum();
+		int tot_right = 0;
+		for (int a : A) {
+			tot_right += a;
+		}
 		int diff = 0;
+		int min = 0;
 
 		for (int k = 0; k < A.length - 1; k++) {
 			tot_left += A[k];
 			tot_right -= A[k];
-
 			diff = Math.abs(tot_left - tot_right);
-			if (k == 0) {
+
+			if (diff < min) {
 				min = diff;
 
-			} else if (diff < min) {
+			} else if (k == 0) {
 				min = diff;
 			}
 		}
